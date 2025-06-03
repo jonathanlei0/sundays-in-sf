@@ -59,8 +59,42 @@
 
         h1 {
             font-family: 'Oooh Baby', cursive;
-            font-size: 3.5em;
-            margin-bottom: 0.5em;
+            font-size: 4.5em;
+            margin-top: 0;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            width: 240px;
+        }
+
+        .join-btn {
+            display: block;
+            margin: 20px auto;
+            background: linear-gradient(to right, #7BA553, #6BA8C5);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            width: fit-content;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .join-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .join-btn:active {
+            transform: translateY(0px);
         }
 
         .hero-image {
@@ -74,32 +108,14 @@
             mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 80%);
             -webkit-mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 80%);
         }
-
-        .header-container {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .logo {
-            max-width: 100%;
-            width: 240px;
-            flex-shrink: 0;
-        }
-
-        .title {
-            margin: 0;
-        }
     </style>
 </head>
 
 <body>
     <section>
-        <div class="header-container">
-            <img src="sundays-in-sf-logo.png" alt="Sundays in SF logo" class="logo">
-            <h1 class="title">Sundays in SF</h1>
-        </div>
+        <img src="sundays-in-sf-logo.png" alt="Sundays in SF logo" style="max-width: 100%; width: 240px" class="logo">
+        <h1>Sundays in SF</h1>
+        <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn">Join Us This Sunday!</a>
         <i>Every Sunday, 1 PM to 4:30 PM | Voltage Park office in FiDi | <a href="https://lu.ma/sundaysinsf" target="_blank">Register!</a></i>
         <br>
         <p>
@@ -164,5 +180,47 @@
         </div>
     </section>
     <img src="san-francisco.png" alt="San Francisco cityscape" style="width: 100%; border-radius: 0" class="hero-image">
+    
+    <script>
+        function getUpcomingSundayDate() {
+            const now = new Date();
+            const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const currentHour = now.getHours();
+            
+            let nextSunday = new Date(now);
+            
+            if (currentDay === 0) { // Today is Sunday
+                if (currentHour >= 13) { // 1 PM or later
+                    // Show next Sunday (7 days from now)
+                    nextSunday.setDate(now.getDate() + 7);
+                }
+                // If it's Sunday before 1 PM, show today (don't add days)
+            } else {
+                // Calculate days until next Sunday
+                const daysUntilSunday = 7 - currentDay;
+                nextSunday.setDate(now.getDate() + daysUntilSunday);
+            }
+            
+            // Format as M/D
+            const month = nextSunday.getMonth() + 1; // getMonth() returns 0-11
+            const day = nextSunday.getDate();
+            
+            return `${month}/${day}`;
+        }
+        
+        function updateButtonText() {
+            const sundayDate = getUpcomingSundayDate();
+            const button = document.querySelector('.join-btn');
+            if (button) {
+                button.textContent = `Join Us This Sunday ${sundayDate}`;
+            }
+        }
+        
+        // Update button text when page loads
+        document.addEventListener('DOMContentLoaded', updateButtonText);
+        
+        // Check every hour if we need to update the date
+        setInterval(updateButtonText, 60 * 60 * 1000); // Check every hour
+    </script>
 </body>
 </html>
