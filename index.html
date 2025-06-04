@@ -35,7 +35,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-color: #F7F1E6;
+            background: #F7F1E6;
         }
 
         section {
@@ -59,7 +59,7 @@
 
         h1 {
             font-family: 'Oooh Baby', cursive;
-            font-size: 4.5em;
+            font-size: 3.5em;
             margin-top: 0;
             margin-bottom: 0;
             text-align: center;
@@ -77,24 +77,22 @@
 
         .join-btn {
             display: block;
-            margin: 20px auto;
-            background: #F36F32;
-            color: white;
-            border: 2pt solid white;
-            padding: 12px 30px;
+            margin: 10px auto;
+            background: #F7F1E6;
+            color: #1C1C1C;
+            border: 1pt solid #1C1C1C;
+            padding: 6px 10px;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 24px;
+            font-size: 16px;
             text-align: center;
             width: fit-content;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
         }
 
         .join-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            opacity: 0.8;
         }
 
         .join-btn:active {
@@ -112,16 +110,270 @@
             mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 80%);
             -webkit-mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 80%);
         }
+
+        .info-block {
+            font-family: 'Mulish', sans-serif;
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .info-block-item {
+            font-family: 'Mulish', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.1rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .landing-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #e8e0d1;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .landing-page.sweep-up {
+            transform: translateY(-100%);
+        }
+
+        .landing-title {
+            font-family: 'Oooh Baby', cursive;
+            font-size: 5em;
+            color: #333;
+            text-align: center;
+            opacity: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .landing-title {
+                font-size: 3.5em;
+            }
+            
+            .timeline-block {
+                font-size: 0.6em;
+            }
+            
+            .timeline-block:hover {
+                transform: scale(1.2);
+            }
+            
+            .timeline-container {
+                padding: 0 10px;
+            }
+            
+            .timeline-block .duration {
+                display: none !important;
+            }
+            
+            .timeline-block:hover .activity-name {
+                opacity: 1 !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-block {
+                font-size: 0.5em;
+            }
+            
+            .timeline-block:hover {
+                transform: scale(1.1);
+            }
+            
+            .timeline {
+                height: 50px;
+            }
+        }
+
+        .timeline-container {
+            margin: 30px auto;
+            max-width: 600px;
+            padding: 0 10px;
+        }
+
+        .timeline {
+            display: flex;
+            height: 60px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .timeline-block {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            background: #E8B03699;
+        }
+
+        .timeline-block:last-child {
+            border-right: none;
+        }
+
+        .timeline-block:hover {
+            transform: scale(1.20);
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            background: #E8B036;
+        }
+
+        .timeline-block .activity-name {
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-block .duration {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-block:hover .activity-name {
+            opacity: 0;
+        }
+
+        .timeline-block:hover .duration {
+            opacity: 1;
+        }
+
+        .timeline-block.food-intro { flex: 45; }
+        .timeline-block.focus1 { flex: 60; }
+        .timeline-block.break { flex: 20; }
+        .timeline-block.focus2 { flex: 60; }
+        .timeline-block.share { flex: 25; }
+
+        .tooltip {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 20;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #333;
+        }
+
+        .timeline-block:hover .tooltip {
+            opacity: 1;
+        }
+
+        .timeline-times {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+        }
     </style>
 </head>
 
 <body>
+    <div class="landing-page" id="landingPage">
+        <h1 class="landing-title" id="typewriter-landing"></h1>
+    </div>
+    
     <section>
-        <img src="sundays-in-sf-logo-favicon.png" alt="Sundays in SF logo" style="max-width: 100%; width: 240px" class="logo">
-        <h1 id="typewriter-title"></h1>
-        <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn">Join Us This Sunday!</a>
-        <i>Every Sunday, 1 PM to 4:30 PM | Voltage Park office in FiDi | <a href="https://lu.ma/sundaysinsf" target="_blank">Register!</a></i>
-        <br>
+        <!-- <img src="sundays-in-sf-logo-favicon.png" alt="Sundays in SF logo" style="max-width: 100%; width: 240px" class="logo"> -->
+        <h1>Sundays in SF</h1>
+        <img src="session2-photo.jpg" alt="Sundays in SF session photo" style="width: 90%; max-width: 690px; border-radius: 8px; margin: 10px auto; display: block;">
+        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto; margin-bottom: 10px; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
+        <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn" style="margin-top: 0px;">Join Us This Sunday!</a>
+        <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-weight: bold;">Details</p>
+        <div class="info-block">
+            <div class="info-block-item">
+              <span class="emoji">📍</span>
+              <span>Voltage Park Office in FiDi</span>
+            </div>
+            <div class="info-block-item">
+              <span class="emoji">🌯</span>
+              <span>Light catered food provided</span>
+            </div>
+            <div class="info-block-item">
+                <span class="emoji">🕐</span>
+                <span>Sundays, 1:00 PM to 4:30 PM</span>
+              </div>
+          </div>
+        <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-weight: bold;">Schedule</p>
+        <div class="timeline-container" style="margin-top: 10px;">
+            <div class="timeline">
+                <div class="timeline-block food-intro">
+                    <span class="activity-name">Food/Intros</span>
+                    <span class="duration">45 min</span>
+                    <div class="tooltip">Food & introductions<br>1:00 PM - 1:45 PM</div>
+                </div>
+                <div class="timeline-block focus1">
+                    <span class="activity-name">Focus 1</span>
+                    <span class="duration">1 hour</span>
+                    <div class="tooltip">1st Focus session<br>1:45 PM - 2:45 PM</div>
+                </div>
+                <div class="timeline-block break">
+                    <span class="activity-name">Break</span>
+                    <span class="duration">20 min</span>
+                    <div class="tooltip">Break<br>2:45 PM - 3:05 PM</div>
+                </div>
+                <div class="timeline-block focus2">
+                    <span class="activity-name">Focus 2</span>
+                    <span class="duration">1 hour</span>
+                    <div class="tooltip">2nd Focus session<br>3:05 PM - 4:05 PM</div>
+                </div>
+                <div class="timeline-block share">
+                    <span class="activity-name">Share</span>
+                    <span class="duration">25 min</span>
+                    <div class="tooltip">Show or tell<br>4:05 PM - 4:30 PM</div>
+                </div>
+            </div>
+            <div class="timeline-times">
+                <span>1:00 PM</span>
+                <span>4:30 PM</span>
+            </div>
+        </div>
+
+        <!-- <p style="margin-top: 300px;">Every Sunday, 1 PM to 4:30 PM | 📍 Voltage Park office in FiDi</p>
         <p>
             Sundays in SF is a weekly coworking club. We build fun, creative side projects and enjoy each others' company. 
             <br><br>
@@ -143,8 +395,7 @@
             Sundays, 1:00 PM to 4:30 PM
         </p>
         <ul>
-            <li>Arrive & food - 30 mins</li>
-            <li>Welcome and introductions - 15 mins</li>
+            <li>Food & introductions - 45 mins</li>
             <li>Focus session - 1 hour</li>
             <li>Break - 20 mins</li>
             <li>Focus session - 1 hour</li>
@@ -153,11 +404,10 @@
         <p>
             <b>Space</b><br>
             We want to create an environment that facilitates exploration and creativity. To do this, we ask that you treat Sundays in SF as a second home: don't make a mess, and approach fellow co-(co?)workers as you would guests in your home. We ask that Luma tickets be present for admission.
-            <br><br>
-            <b>Acknowledgements</b><br>
-            Thank you to <a href="https://www.voltagepark.com" target="_blank">Voltage Park</a> for providing the space and food, and thank you to our friends at <a href="https://playspace.club" target="_blank">Playspace</a> and <a href="https://www.socratica.info" target="_blank">Socratica</a> for inspiring the creation of Sundays in SF! 
-            <br><br>
-            <p><b>Next Sunday's event</b></p>
+            <br><br> -->
+            <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold;">Acknowledgements</p>
+            <p style="text-align: center; margin-top: 5px;">Thank you to <a href="https://www.voltagepark.com" target="_blank">Voltage Park</a> for providing the space and food, and thank you to our friends at <a href="https://playspace.club" target="_blank">Playspace</a> and <a href="https://www.socratica.info" target="_blank">Socratica</a> for inspiring the creation of Sundays in SF!</p>
+            <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold;">Upcoming Sunday Event</p>
         </p><iframe
         src="https://lu.ma/embed/calendar/cal-FFBSUEbqC7XLj6d/events?compact=true&lt=light"
         width="100%"
@@ -186,44 +436,75 @@
     <img src="san-francisco.png" alt="San Francisco cityscape" style="width: 100%; border-radius: 0" class="hero-image">
     
     <script>
-        // Typewriter effect for the title
-        function typeWriter() {
-            const text = "Sundays in SF ";
-            const titleElement = document.getElementById('typewriter-title');
-            let i = 0;
-            let blinkInterval;
+        // Landing page typewriter effect
+        function landingTypewriter() {
+            const words = ["imagine.", "create.", "connect."];
+            const titleElement = document.getElementById('typewriter-landing');
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
             
             function type() {
-                if (i < text.length) {
-                    titleElement.textContent = text.substring(0, i + 1) + '|';
-                    i++;
-                    setTimeout(type, 150); // Typing speed
-                } else {
-                    // After typing is complete, start blinking cursor for 5 seconds
-                    blinkCursor();
-                }
-            }
-            
-            function blinkCursor() {
-                const currentText = text;
-                let showCursor = true;
+                const currentWord = words[wordIndex];
                 
-                blinkInterval = setInterval(() => {
-                    if (showCursor) {
-                        titleElement.textContent = currentText + '|';
-                    } else {
-                        titleElement.textContent = currentText;
+                if (isDeleting) {
+                    // Backspace
+                    titleElement.textContent = currentWord.substring(0, charIndex - 1) + '|';
+                    charIndex--;
+                    
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        wordIndex++;
+                        setTimeout(type, 100); // Brief pause before next word
+                        return;
                     }
-                    showCursor = !showCursor;
-                }, 530); // Cursor blink speed
-                
-                // After 5 seconds, restart the typing effect
-                setTimeout(() => {
-                    clearInterval(blinkInterval);
-                    i = 0; // Reset counter
-                    titleElement.textContent = '|'; // Start with just cursor
-                    setTimeout(type, 500); // Brief pause before retyping
-                }, 5000); // Wait 5 seconds
+                    setTimeout(type, 50); // Fast backspace
+                } else {
+                    // Type forward
+                    titleElement.textContent = currentWord.substring(0, charIndex + 1) + '|';
+                    charIndex++;
+                    
+                    if (charIndex === currentWord.length) {
+                        if (wordIndex < words.length - 1) {
+                            // Not the last word, blink cursor once then start deleting
+                            let blinkCount = 0;
+                            const blinkInterval = setInterval(() => {
+                                if (blinkCount % 2 === 0) {
+                                    titleElement.textContent = currentWord; // Hide cursor
+                                } else {
+                                    titleElement.textContent = currentWord + '|'; // Show cursor
+                                }
+                                blinkCount++;
+                                
+                                if (blinkCount >= 3) { // Blink once (hide, show, hide)
+                                    clearInterval(blinkInterval);
+                                    titleElement.textContent = currentWord + '|'; // Ensure cursor is visible
+                                    setTimeout(() => {
+                                        isDeleting = true;
+                                        type();
+                                    }, 200); // Brief pause after blinking
+                                }
+                            }, 300); // Blink speed
+                            return;
+                        } else {
+                            // Last word, remove cursor and trigger transition
+                            setTimeout(() => {
+                                titleElement.textContent = currentWord;
+                                // Trigger sweep up after brief pause
+                                setTimeout(() => {
+                                    const landingPage = document.getElementById('landingPage');
+                                    landingPage.classList.add('sweep-up');
+                                    
+                                    setTimeout(() => {
+                                        landingPage.style.display = 'none';
+                                    }, 1200);
+                                }, 500);
+                            }, 300);
+                            return;
+                        }
+                    }
+                    setTimeout(type, 100); // Typing speed
+                }
             }
             
             type();
@@ -265,8 +546,10 @@
         
         // Update button text when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            typeWriter();
             updateButtonText();
+            
+            // Start landing page typewriter effect after 1 second delay
+            setTimeout(landingTypewriter, 500);
         });
         
         // Check every hour if we need to update the date
