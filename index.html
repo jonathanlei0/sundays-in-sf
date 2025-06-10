@@ -210,7 +210,7 @@
         .timeline-container {
             margin: 30px auto;
             max-width: 600px;
-            padding: 0 10px;
+            padding: 0 20px;
         }
 
         .timeline {
@@ -309,6 +309,83 @@
             font-size: 0.9em;
             color: #666;
         }
+
+        .gallery-container {
+            position: relative;
+            width: 90%;
+            max-width: 690px;
+            margin: 10px auto;
+            border-radius: 8px;
+            overflow: visible;
+            display: block;
+        }
+
+        .gallery-wrapper {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 90%; /* Increased to accommodate polaroid frame */
+            overflow: visible;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            background: white;
+            border-radius: 8px;
+            padding: 20px 20px 60px 20px;
+            box-sizing: border-box;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: calc(100% - 40px);
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .polaroid-date {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Oooh Baby', cursive;
+            font-size: 30px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .gallery-indicators {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .gallery-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .gallery-indicator.active {
+            background: rgba(255, 255, 255, 0.9);
+        }
     </style>
 </head>
 
@@ -320,8 +397,23 @@
     <section>
         <!-- <img src="sundays-in-sf-logo-favicon.png" alt="Sundays in SF logo" style="max-width: 100%; width: 240px" class="logo"> -->
         <h1>Sundays in SF</h1>
-        <img src="session2-photo.jpg" alt="Sundays in SF session photo" style="width: 90%; max-width: 690px; border-radius: 8px; margin: 10px auto; display: block;">
-        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto; margin-bottom: 10px; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
+        <div class="gallery-container">
+            <div class="gallery-wrapper">
+                <div class="gallery-slide active">
+                    <img src="session2-photo.jpg" alt="Sundays in SF session photo 2">
+                    <div class="polaroid-date">6/1/25</div>
+                </div>
+                <div class="gallery-slide">
+                    <img src="session3-photo.jpeg" alt="Sundays in SF session photo 3">
+                    <div class="polaroid-date">6/8/25</div>
+                </div>
+                <div class="gallery-indicators">
+                    <div class="gallery-indicator active" onclick="currentSlide(1)"></div>
+                    <div class="gallery-indicator" onclick="currentSlide(2)"></div>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
         <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn" style="margin-top: 0px;">Join Us This Sunday!</a>
         <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-weight: bold;">Details</p>
         <div class="info-block">
@@ -455,10 +547,10 @@
                     if (charIndex === 0) {
                         isDeleting = false;
                         wordIndex++;
-                        setTimeout(type, 100); // Brief pause before next word
+                        setTimeout(type, 50); // Brief pause before next word
                         return;
                     }
-                    setTimeout(type, 50); // Fast backspace
+                    setTimeout(type, 30); // Fast backspace
                 } else {
                     // Type forward
                     titleElement.textContent = currentWord.substring(0, charIndex + 1) + '|';
@@ -482,9 +574,9 @@
                                     setTimeout(() => {
                                         isDeleting = true;
                                         type();
-                                    }, 200); // Brief pause after blinking
+                                    }, 100); // Brief pause after blinking
                                 }
-                            }, 300); // Blink speed
+                            }, 200); // Blink speed
                             return;
                         } else {
                             // Last word, remove cursor and trigger transition
@@ -498,18 +590,53 @@
                                     setTimeout(() => {
                                         landingPage.style.display = 'none';
                                     }, 1200);
-                                }, 500);
-                            }, 300);
+                                }, 200);
+                            }, 150);
                             return;
                         }
                     }
-                    setTimeout(type, 100); // Typing speed
+                    setTimeout(type, 60); // Typing speed
                 }
             }
             
             type();
         }
         
+        // Gallery functionality
+        let currentSlideIndex = 0;
+        let galleryInterval;
+
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const indicators = document.querySelectorAll('.gallery-indicator');
+            
+            // Remove active class from all slides and indicators
+            slides.forEach(slide => slide.classList.remove('active'));
+            indicators.forEach(indicator => indicator.classList.remove('active'));
+            
+            // Add active class to current slide and indicator
+            slides[index].classList.add('active');
+            indicators[index].classList.add('active');
+            
+            currentSlideIndex = index;
+        }
+
+        function currentSlide(index) {
+            showSlide(index - 1); // Convert to 0-based index
+            resetGalleryTimer();
+        }
+
+        function nextSlide() {
+            const slides = document.querySelectorAll('.gallery-slide');
+            const newIndex = (currentSlideIndex + 1) % slides.length;
+            showSlide(newIndex);
+        }
+
+        function resetGalleryTimer() {
+            clearInterval(galleryInterval);
+            galleryInterval = setInterval(nextSlide, 5000); // Auto-advance every 3 seconds
+        }
+
         function getUpcomingSundayDate() {
             const now = new Date();
             const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
@@ -548,8 +675,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateButtonText();
             
-            // Start landing page typewriter effect after 1 second delay
+            // Start landing page typewriter effect after 0.5 second delay
             setTimeout(landingTypewriter, 500);
+            
+            // Initialize gallery auto-advance
+            resetGalleryTimer();
         });
         
         // Check every hour if we need to update the date
