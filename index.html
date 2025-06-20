@@ -386,6 +386,25 @@
         .gallery-indicator.active {
             background: rgba(255, 255, 255, 0.9);
         }
+
+        .main-typewriter {
+            text-align: center;
+            font-family: 'Oooh Baby', cursive;
+            font-size: 4.5em;
+            color: #666;
+            margin: 0px auto 10px auto;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .main-typewriter {
+                font-size: 2.8em;
+                min-height: 80px;
+            }
+        }
     </style>
 </head>
 
@@ -418,7 +437,8 @@
                 </div>
             </div>
         </div>
-        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
+        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto 5px auto; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
+        <div class="main-typewriter" id="main-typewriter"></div>
         <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn" style="margin-top: 0px;">Join Us This Sunday!</a>
         <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-weight: bold;">Details</p>
         <div class="info-block">
@@ -535,8 +555,39 @@
     <script>
         // Landing page typewriter effect
         function landingTypewriter() {
-            const words = ["imagine.", "create.", "connect."];
+            const text = "Sundays in SF";
             const titleElement = document.getElementById('typewriter-landing');
+            let charIndex = 0;
+            
+            function type() {
+                if (charIndex < text.length) {
+                    titleElement.textContent = text.substring(0, charIndex + 1) + '|';
+                    charIndex++;
+                    setTimeout(type, 75); // Typing speed
+                } else {
+                    // Remove cursor and trigger transition after brief pause
+                    setTimeout(() => {
+                        titleElement.textContent = text;
+                        // Trigger sweep up after brief pause
+                        setTimeout(() => {
+                            const landingPage = document.getElementById('landingPage');
+                            landingPage.classList.add('sweep-up');
+                            
+                            setTimeout(() => {
+                                landingPage.style.display = 'none';
+                            }, 1200);
+                        }, 500);
+                    }, 300);
+                }
+            }
+            
+            type();
+        }
+        
+        // Main page continuous typewriter effect
+        function mainPageTypewriter() {
+            const words = ["imagine.", "create.", "connect."];
+            const titleElement = document.getElementById('main-typewriter');
             let wordIndex = 0;
             let charIndex = 0;
             let isDeleting = false;
@@ -551,62 +602,31 @@
                     
                     if (charIndex === 0) {
                         isDeleting = false;
-                        wordIndex++;
-                        setTimeout(type, 50); // Brief pause before next word
+                        wordIndex = (wordIndex + 1) % words.length; // Loop through words
+                        setTimeout(type, 250); // Brief pause before next word
                         return;
                     }
-                    setTimeout(type, 30); // Fast backspace
+                    setTimeout(type, 50); // Slower backspace
                 } else {
                     // Type forward
                     titleElement.textContent = currentWord.substring(0, charIndex + 1) + '|';
                     charIndex++;
                     
                     if (charIndex === currentWord.length) {
-                        if (wordIndex < words.length - 1) {
-                            // Not the last word, blink cursor once then start deleting
-                            let blinkCount = 0;
-                            const blinkInterval = setInterval(() => {
-                                if (blinkCount % 2 === 0) {
-                                    titleElement.textContent = currentWord; // Hide cursor
-                                } else {
-                                    titleElement.textContent = currentWord + '|'; // Show cursor
-                                }
-                                blinkCount++;
-                                
-                                if (blinkCount >= 3) { // Blink once (hide, show, hide)
-                                    clearInterval(blinkInterval);
-                                    titleElement.textContent = currentWord + '|'; // Ensure cursor is visible
-                                    setTimeout(() => {
-                                        isDeleting = true;
-                                        type();
-                                    }, 100); // Brief pause after blinking
-                                }
-                            }, 200); // Blink speed
-                            return;
-                        } else {
-                            // Last word, remove cursor and trigger transition
-                            setTimeout(() => {
-                                titleElement.textContent = currentWord;
-                                // Trigger sweep up after brief pause
-                                setTimeout(() => {
-                                    const landingPage = document.getElementById('landingPage');
-                                    landingPage.classList.add('sweep-up');
-                                    
-                                    setTimeout(() => {
-                                        landingPage.style.display = 'none';
-                                    }, 1200);
-                                }, 200);
-                            }, 150);
-                            return;
-                        }
+                        // Word complete, pause then start deleting
+                        setTimeout(() => {
+                            isDeleting = true;
+                            type();
+                        }, 2500); // Longer pause to read the word
+                        return;
                     }
-                    setTimeout(type, 60); // Typing speed
+                    setTimeout(type, 120); // Slower typing speed
                 }
             }
             
             type();
         }
-        
+
         // Gallery functionality
         let currentSlideIndex = 0;
         let galleryInterval;
@@ -639,7 +659,7 @@
 
         function resetGalleryTimer() {
             clearInterval(galleryInterval);
-            galleryInterval = setInterval(nextSlide, 5000); // Auto-advance every 3 seconds
+            galleryInterval = setInterval(nextSlide, 3000); // Auto-advance every 3 seconds
         }
 
         function getUpcomingSundayDate() {
@@ -683,8 +703,11 @@
             // Start landing page typewriter effect after 0.5 second delay
             setTimeout(landingTypewriter, 500);
             
-            // Initialize gallery auto-advance
-            resetGalleryTimer();
+            // Start main page typewriter after landing page transition
+            setTimeout(mainPageTypewriter, 3000); // Start after landing page is done
+            
+            // Initialize gallery auto-advance after landing page transition
+            setTimeout(resetGalleryTimer, 3200); // Start gallery slightly after main page loads
         });
         
         // Check every hour if we need to update the date
