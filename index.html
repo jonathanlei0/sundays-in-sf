@@ -10,7 +10,7 @@
     <meta name="title" content="Sundays in SF">
     <meta name="description"
         content="Sundays in SF is a weekly coworking club. We build fun, creative side projects and enjoy each others' company. Come build with us!">
-    <link rel="icon" type="image/png" href="sundays-in-sf-logo-favicon.png">
+    <link rel="icon" type="image/png" href="sun-favicon.png">
     <link rel="manifest" href="site.webmanifest">
 
     <!-- Open Graph / Facebook -->
@@ -30,16 +30,34 @@
     <meta property="twitter:image" content="https://sundaysinsf.com/opengraph-image.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oooh+Baby&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: #F7F1E6;
+            background: #FFFFFF;
+            transition: background-color 0.8s ease-in-out;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('cloud-background.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 0;
         }
 
         section {
-            font-family: 'Mulish', sans-serif;
+            font-family: 'Lato', sans-serif;
             line-height: 1.4;
             font-size: 17px;
             padding: 0 10px;
@@ -58,8 +76,9 @@
         }
 
         h1 {
-            font-family: 'Oooh Baby', cursive;
-            font-size: 3.5em;
+            font-family: 'Shadows Into Light Two', cursive;
+            font-weight: normal;
+            font-size: 4.2em;
             margin-top: 0;
             margin-bottom: 0;
             text-align: center;
@@ -67,36 +86,67 @@
 
         .logo {
             display: block;
-            margin: 0 auto;
+            margin: 0 auto 0px auto;
             max-width: 100%;
-            width: 240px;
+            width: 700px;
             position: relative;
             transition: all 0.3s ease;
-            cursor: pointer;
+        }
+
+        .logo:hover {
+            transform: scale(1.01);
+            filter: brightness(1.02);
+        }
+
+        .logo:active {
+            transform: scale(0.98);
         }
 
         .join-btn {
             display: block;
-            margin: 10px auto;
-            background: #F7F1E6;
-            color: #1C1C1C;
-            border: 1pt solid #1C1C1C;
-            padding: 6px 10px;
+            margin: 15px auto;
+            background: rgba(255, 255, 255, 0.5);
+            color: #333;
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            padding: 15px 20px;
             text-decoration: none;
-            border-radius: 8px;
+            border-radius: 15px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
             font-weight: 600;
-            font-size: 16px;
             text-align: center;
             width: fit-content;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
 
         .join-btn:hover {
-            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .join-btn:active {
             transform: translateY(0px);
+        }
+
+        .info-block {
+            font-family: 'Lato';
+            text-align: center;
+            margin-top: 0;
+        }
+
+        .info-block-item {
+            font-family: 'Lato';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+            padding: 0.3rem 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.2rem;
+            color: #333;
         }
 
         .hero-image {
@@ -111,285 +161,18 @@
             -webkit-mask: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 60%, rgba(0,0,0,1) 80%);
         }
 
-        .info-block {
-            font-family: 'Mulish', sans-serif;
-            text-align: center;
-            margin-top: 0;
-        }
 
-        .info-block-item {
-            font-family: 'Mulish', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            margin: 0.5rem 0;
-            padding: 0.1rem 1rem;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            color: #333;
-        }
 
-        .landing-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #e8e0d1;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-        }
 
-        .landing-page.sweep-up {
-            transform: translateY(-100%);
-        }
 
-        .landing-title {
-            font-family: 'Oooh Baby', cursive;
-            font-size: 5em;
-            color: #333;
-            text-align: center;
-            opacity: 1;
-        }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        @media (max-width: 768px) {
-            .landing-title {
-                font-size: 3.5em;
-            }
-            
-            .timeline-block {
-                font-size: 0.6em;
-            }
-            
-            .timeline-block:hover {
-                transform: scale(1.2);
-            }
-            
-            .timeline-container {
-                padding: 0 10px;
-            }
-            
-            .timeline-block .duration {
-                display: none !important;
-            }
-            
-            .timeline-block:hover .activity-name {
-                opacity: 1 !important;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .timeline-block {
-                font-size: 0.5em;
-            }
-            
-            .timeline-block:hover {
-                transform: scale(1.1);
-            }
-            
-            .timeline {
-                height: 50px;
-            }
-        }
-
-        .timeline-container {
-            margin: 30px auto;
-            max-width: 600px;
-            padding: 0 20px;
-        }
-
-        .timeline {
-            display: flex;
-            height: 60px;
-            border-radius: 30px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .timeline-block {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7em;
-            font-weight: 600;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-right: 1px solid rgba(255, 255, 255, 0.3);
-            background: #E8B03699;
-        }
-
-        .timeline-block:last-child {
-            border-right: none;
-        }
-
-        .timeline-block:hover {
-            transform: scale(1.20);
-            z-index: 10;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            background: #E8B036;
-        }
-
-        .timeline-block .activity-name {
-            transition: opacity 0.3s ease;
-        }
-
-        .timeline-block .duration {
-            position: absolute;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .timeline-block:hover .activity-name {
-            opacity: 0;
-        }
-
-        .timeline-block:hover .duration {
-            opacity: 1;
-        }
-
-        .timeline-block.food-intro { flex: 45; }
-        .timeline-block.focus1 { flex: 60; }
-        .timeline-block.break { flex: 20; }
-        .timeline-block.focus2 { flex: 60; }
-        .timeline-block.share { flex: 25; }
-
-        .tooltip {
-            position: absolute;
-            bottom: 70px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #333;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9em;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 20;
-        }
-
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 6px solid transparent;
-            border-top-color: #333;
-        }
-
-        .timeline-block:hover .tooltip {
-            opacity: 1;
-        }
-
-        .timeline-times {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #666;
-        }
-
-        .gallery-container {
-            position: relative;
-            width: 90%;
-            max-width: 690px;
-            margin: 10px auto;
-            border-radius: 8px;
-            overflow: visible;
-            display: block;
-        }
-
-        .gallery-wrapper {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 90%; /* Increased to accommodate polaroid frame */
-            overflow: visible;
-        }
-
-        .gallery-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-            background: white;
-            border-radius: 8px;
-            padding: 20px 20px 60px 20px;
-            box-sizing: border-box;
-        }
-
-        .gallery-slide.active {
-            opacity: 1;
-        }
-
-        .gallery-slide img {
-            width: 100%;
-            height: calc(100% - 40px);
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
-        .polaroid-date {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Oooh Baby', cursive;
-            font-size: 30px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .gallery-indicators {
-            position: absolute;
-            bottom: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .gallery-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.5);
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        .gallery-indicator.active {
-            background: rgba(255, 255, 255, 0.9);
-        }
 
         .main-typewriter {
             text-align: center;
-            font-family: 'Oooh Baby', cursive;
+            font-family: 'Shadows Into Light Two', cursive;
+            font-weight: normal;
             font-size: 4.5em;
             color: #666;
             margin: 0px auto 10px auto;
@@ -399,7 +182,101 @@
             justify-content: center;
         }
 
+        .schedule-section {
+            margin: 50px auto;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .schedule-title {
+            font-family: 'Shadows Into Light Two', cursive;
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .schedule-emoji {
+            font-size: 1.5em;
+            flex-shrink: 0;
+            font-family: 'Shadows Into Light Two', cursive;
+            font-weight: bold;
+            color: #333;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .schedule-content {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .schedule-activity {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .schedule-duration {
+            font-family: 'Shadows Into Light Two';
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #666;
+            margin: 2px 0 0 0;
+        }
+
+        @media (max-width: 640px) {
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
+            h1 {
+                font-size: 3.2em;
+            }
+            
+            .logo {
+                width: 450px;
+            }
+            
             .main-typewriter {
                 font-size: 2.8em;
                 min-height: 80px;
@@ -409,90 +286,74 @@
 </head>
 
 <body>
-    <div class="landing-page" id="landingPage">
-        <h1 class="landing-title" id="typewriter-landing"></h1>
-    </div>
-    
     <section>
-        <!-- <img src="sundays-in-sf-logo-favicon.png" alt="Sundays in SF logo" style="max-width: 100%; width: 240px" class="logo"> -->
-        <h1>Sundays in SF</h1>
-        <div class="gallery-container">
-            <div class="gallery-wrapper">
-                <div class="gallery-slide active">
-                    <img src="session2-photo.jpg" alt="Sundays in SF session photo 2">
-                    <div class="polaroid-date">6/1/25</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="session3-photo.jpeg" alt="Sundays in SF session photo 3">
-                    <div class="polaroid-date">6/8/25</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="session4-photo.JPG" alt="Sundays in SF session photo 4">
-                    <div class="polaroid-date">6/15/25</div>
-                </div>
-                <div class="gallery-slide">
-                    <img src="session5-photo.jpg" alt="Sundays in SF session photo 5">
-                    <div class="polaroid-date">6/22/25</div>
-                </div>
-                <div class="gallery-indicators">
-                    <div class="gallery-indicator active" onclick="currentSlide(1)"></div>
-                    <div class="gallery-indicator" onclick="currentSlide(2)"></div>
-                    <div class="gallery-indicator" onclick="currentSlide(3)"></div>
-                    <div class="gallery-indicator" onclick="currentSlide(4)"></div>
-                </div>
-            </div>
-        </div>
-        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto 5px auto; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
-        <div class="main-typewriter" id="main-typewriter"></div>
-        <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn" style="margin-top: 0px;">Join Us This Sunday!</a>
-        <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-weight: bold;">Details</p>
+        <img src="sun-logo.png" alt="Sundays in SF logo" class="logo">
+        <h1 style="margin-top: -15px; margin-bottom: 30px;">Sundays in SF</h1>
+        <a href="https://lu.ma/sundaysinsf" target="_blank" class="join-btn">Join Us This Sunday!</a>
         <div class="info-block">
             <div class="info-block-item">
-              <span class="emoji">📍</span>
-              <span>Voltage Park Office in FiDi</span>
+              <span class="emoji">🕐</span>
+              <span>Sundays, 1 PM – 4:30 PM</span>
             </div>
+            <div class="info-block-item">
+                <span class="emoji">📍</span>
+                <span>FiDi – Voltage Park</span>
+              </div>
             <div class="info-block-item">
               <span class="emoji">🌯</span>
-              <span>Light catered food provided</span>
+              <span>Food provided</span>
             </div>
-            <div class="info-block-item">
-                <span class="emoji">🕐</span>
-                <span>Sundays, 1:00 PM to 4:30 PM</span>
-              </div>
           </div>
-        <p style="text-align: center; margin-top: 30px; margin-bottom: 0; font-weight: bold;">Schedule</p>
-        <div class="timeline-container" style="margin-top: 10px;">
-            <div class="timeline">
-                <div class="timeline-block food-intro">
-                    <span class="activity-name">Food/Intros</span>
-                    <span class="duration">45 min</span>
-                    <div class="tooltip">Food & introductions<br>1:00 PM - 1:45 PM</div>
-                </div>
-                <div class="timeline-block focus1">
-                    <span class="activity-name">Focus 1</span>
-                    <span class="duration">1 hour</span>
-                    <div class="tooltip">1st Focus session<br>1:45 PM - 2:45 PM</div>
-                </div>
-                <div class="timeline-block break">
-                    <span class="activity-name">Break</span>
-                    <span class="duration">20 min</span>
-                    <div class="tooltip">Break<br>2:45 PM - 3:05 PM</div>
-                </div>
-                <div class="timeline-block focus2">
-                    <span class="activity-name">Focus 2</span>
-                    <span class="duration">1 hour</span>
-                    <div class="tooltip">2nd Focus session<br>3:05 PM - 4:05 PM</div>
-                </div>
-                <div class="timeline-block share">
-                    <span class="activity-name">Share</span>
-                    <span class="duration">25 min</span>
-                    <div class="tooltip">Show or tell<br>4:05 PM - 4:30 PM</div>
-                </div>
-            </div>
-            <div class="timeline-times">
-                <span>1:00 PM</span>
-                <span>4:30 PM</span>
-            </div>
+
+        <div class="main-typewriter" id="main-typewriter"></div>
+        <p style="text-align: center; font-size: 1.3em; font-style: italic; font-weight: 500; margin: 30px auto 5px auto; max-width: 600px; line-height: 1.5; color: #444;">A cozy few hours to chase curiosity, meet thoughtful people, and make cool things — the only rule?<br><span style="font-weight: bold;">Leave work at the door.</span></p>
+
+        <div class="schedule-section">
+            <div class="schedule-title">Schedule</div>
+            <ul class="schedule-grid">
+                <li class="schedule-card">
+                    <span class="schedule-emoji">1</span>
+                    <div class="schedule-content">
+                        <div class="schedule-activity">Arrive & Food</div>
+                        <div class="schedule-duration">30 mins</div>
+                    </div>
+                </li>
+                <li class="schedule-card">
+                    <span class="schedule-emoji">2</span>
+                    <div class="schedule-content">
+                        <div class="schedule-activity">Introductions</div>
+                        <div class="schedule-duration">15 mins</div>
+                    </div>
+                </li>
+                <li class="schedule-card">
+                    <span class="schedule-emoji">3</span>
+                    <div class="schedule-content">
+                        <div class="schedule-activity">Focus session #1</div>
+                        <div class="schedule-duration">1 hour</div>
+                    </div>
+                </li>
+                <li class="schedule-card">
+                    <span class="schedule-emoji">4</span>
+                    <div class="schedule-content">
+                        <div class="schedule-activity">Intermission</div>
+                        <div class="schedule-duration">20 mins</div>
+                    </div>
+                </li>
+                <li class="schedule-card">
+                    <span class="schedule-emoji">5</span>
+                    <div class="schedule-content">
+                        <div class="schedule-activity">Focus session #2</div>
+                        <div class="schedule-duration">1 hour</div>
+                    </div>
+                </li>
+                <li class="schedule-card">
+                    <span class="schedule-emoji">6</span>
+                    <div class="schedule-content">
+                        <div class="schedule-activity">Demos</div>
+                        <div class="schedule-duration">25 mins</div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <!-- <p style="margin-top: 300px;">Every Sunday, 1 PM to 4:30 PM | 📍 Voltage Park office in FiDi</p>
@@ -527,9 +388,9 @@
             <b>Space</b><br>
             We want to create an environment that facilitates exploration and creativity. To do this, we ask that you treat Sundays in SF as a second home: don't make a mess, and approach fellow co-(co?)workers as you would guests in your home. We ask that Luma tickets be present for admission.
             <br><br> -->
-            <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold;">Acknowledgements</p>
+            <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold; font-family: 'Shadows Into Light Two', cursive; font-size: 2.2em;">Acknowledgements</p>
             <p style="text-align: center; margin-top: 5px;">Thank you to <a href="https://www.voltagepark.com" target="_blank">Voltage Park</a> for providing the space and food, and thank you to our friends at <a href="https://playspace.club" target="_blank">Playspace</a> and <a href="https://www.socratica.info" target="_blank">Socratica</a> for inspiring the creation of Sundays in SF!</p>
-            <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold;">Upcoming Sunday Event</p>
+            <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold; font-family: 'Shadows Into Light Two', cursive; font-size: 2.2em;">Upcoming Sunday Event</p>
         </p><iframe
         src="https://lu.ma/embed/calendar/cal-FFBSUEbqC7XLj6d/events?compact=true&lt=light"
         width="100%"
@@ -558,36 +419,6 @@
     <img src="san-francisco.png" alt="San Francisco cityscape" style="width: 100%; border-radius: 0" class="hero-image">
     
     <script>
-        // Landing page typewriter effect
-        function landingTypewriter() {
-            const text = "Sundays in SF";
-            const titleElement = document.getElementById('typewriter-landing');
-            let charIndex = 0;
-            
-            function type() {
-                if (charIndex < text.length) {
-                    titleElement.textContent = text.substring(0, charIndex + 1) + '|';
-                    charIndex++;
-                    setTimeout(type, 75); // Typing speed
-                } else {
-                    // Remove cursor and trigger transition after brief pause
-                    setTimeout(() => {
-                        titleElement.textContent = text;
-                        // Trigger sweep up after brief pause
-                        setTimeout(() => {
-                            const landingPage = document.getElementById('landingPage');
-                            landingPage.classList.add('sweep-up');
-                            
-                            setTimeout(() => {
-                                landingPage.style.display = 'none';
-                            }, 1200);
-                        }, 500);
-                    }, 300);
-                }
-            }
-            
-            type();
-        }
         
         // Main page continuous typewriter effect
         function mainPageTypewriter() {
@@ -619,7 +450,7 @@
                     
                     if (charIndex === currentWord.length) {
                         // Word complete, pause then start deleting
-                        setTimeout(() => {
+                setTimeout(() => {
                             isDeleting = true;
                             type();
                         }, 2500); // Longer pause to read the word
@@ -631,42 +462,7 @@
             
             type();
         }
-
-        // Gallery functionality
-        let currentSlideIndex = 0;
-        let galleryInterval;
-
-        function showSlide(index) {
-            const slides = document.querySelectorAll('.gallery-slide');
-            const indicators = document.querySelectorAll('.gallery-indicator');
-            
-            // Remove active class from all slides and indicators
-            slides.forEach(slide => slide.classList.remove('active'));
-            indicators.forEach(indicator => indicator.classList.remove('active'));
-            
-            // Add active class to current slide and indicator
-            slides[index].classList.add('active');
-            indicators[index].classList.add('active');
-            
-            currentSlideIndex = index;
-        }
-
-        function currentSlide(index) {
-            showSlide(index - 1); // Convert to 0-based index
-            resetGalleryTimer();
-        }
-
-        function nextSlide() {
-            const slides = document.querySelectorAll('.gallery-slide');
-            const newIndex = (currentSlideIndex + 1) % slides.length;
-            showSlide(newIndex);
-        }
-
-        function resetGalleryTimer() {
-            clearInterval(galleryInterval);
-            galleryInterval = setInterval(nextSlide, 3000); // Auto-advance every 3 seconds
-        }
-
+        
         function getUpcomingSundayDate() {
             const now = new Date();
             const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
@@ -697,22 +493,38 @@
             const sundayDate = getUpcomingSundayDate();
             const button = document.querySelector('.join-btn');
             if (button) {
-                button.textContent = `Join Us This Sunday ${sundayDate}`;
+                button.textContent = `Join us this Sunday - ${sundayDate}`;
             }
         }
         
-        // Update button text when page loads
+        // Sun logo background color wheel feature
+        const backgroundColors = [
+            '#FFFFFF', // Golden yellow
+            '#FFB3BA', // Deeper pink
+            '#B3D9FF', // Deeper blue
+            '#A5D68A', // Lighter green
+            '#FFD4B3', // Deeper peach
+            '#E5CCFF', // Lighter lavender
+            '#FFB3E6', // Deeper rose
+        ];
+        let currentColorIndex = 0;
+        
+        function cycleBackgroundColor() {
+            currentColorIndex = (currentColorIndex + 1) % backgroundColors.length;
+            const body = document.body;
+            body.style.backgroundColor = backgroundColors[currentColorIndex];
+        }
+
+        // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
             updateButtonText();
             
-            // Start landing page typewriter effect after 0.5 second delay
-            setTimeout(landingTypewriter, 500);
+            // Add click listener to sun logo for background color cycling
+            const logo = document.querySelector('.logo');
+            logo.addEventListener('click', cycleBackgroundColor);
             
-            // Start main page typewriter after landing page transition
-            setTimeout(mainPageTypewriter, 3000); // Start after landing page is done
-            
-            // Initialize gallery auto-advance after landing page transition
-            setTimeout(resetGalleryTimer, 3200); // Start gallery slightly after main page loads
+            // Start main page typewriter immediately
+            setTimeout(mainPageTypewriter, 500);
         });
         
         // Check every hour if we need to update the date
