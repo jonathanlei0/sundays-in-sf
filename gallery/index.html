@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gallery — Sundays in SF</title>
+    <meta name="description" content="Photo gallery from past Sundays in SF sessions">
+    <link rel="icon" type="image/png" href="../sun-favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #FFFFFF;
+            transition: background-color 0.8s ease-in-out;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../cloud-background.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            font-family: 'Lato', sans-serif;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery-title {
+            font-family: 'Shadows Into Light Two', cursive;
+            font-size: 3.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .gallery-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .session-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .session-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .session-image {
+            width: 100%;
+            height: 80%;
+            border-radius: 15px;
+            object-fit: cover;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .session-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .placeholder {
+            background: #FFFFFF;
+            background-image: url('../cloud-background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1em;
+            font-weight: 500;
+            overflow: hidden;
+        }
+
+        .placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #FFD4B3;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .placeholder::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+            background-image: url('../sun-logo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .session-label {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #333;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-1px);
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .gallery-title {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../" class="back-link">← Back to Sundays in SF</a>
+    
+    <div class="container">
+        <h1 class="gallery-title">Session Gallery</h1>
+        <p class="gallery-subtitle">Photos from our weekly coworking sessions</p>
+        
+        <div class="gallery-grid">
+            <!-- Row 1 -->
+            <div class="session-card">
+                <div class="session-image placeholder">
+                </div>
+                <div class="session-label">Session 1</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session2-photo.jpg" alt="Session 2 photo">
+                </div>
+                <div class="session-label">Session 2</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session3-photo.jpeg" alt="Session 3 photo">
+                </div>
+                <div class="session-label">Session 3</div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session4-photo.JPG" alt="Session 4 photo">
+                </div>
+                <div class="session-label">Session 4</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session5-photo.jpg" alt="Session 5 photo">
+                </div>
+                <div class="session-label">Session 5</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image placeholder">
+                </div>
+                <div class="session-label">Session 6</div>
+            </div>
+            
+            <!-- Row 3 -->
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session7-photo.jpg" alt="Session 7 photo">
+                </div>
+                <div class="session-label">Session 7</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session8-photo.jpg" alt="Session 8 photo">
+                </div>
+                <div class="session-label">Session 8</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session9-photo.jpg" alt="Session 9 photo">
+                </div>
+                <div class="session-label">Session 9</div>
+            </div>
+            
+            <!-- Row 4 -->
+            <div class="session-card">
+                <div class="session-image">
+                    <img src="../session10-photo.jpg" alt="Session 10 photo">
+                </div>
+                <div class="session-label">Session 10</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image placeholder">
+                </div>
+                <div class="session-label">Session 11</div>
+            </div>
+            
+            <div class="session-card">
+                <div class="session-image placeholder">
+                </div>
+                <div class="session-label">Session 12</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html> 

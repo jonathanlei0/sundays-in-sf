@@ -211,6 +211,91 @@
                 padding: 20px;
             }
         }
+
+        @media print {
+            body::before {
+                display: none; /* Remove background image for printing */
+            }
+            
+            .container {
+                max-width: 100%;
+                padding: 15px;
+                margin: 0;
+            }
+            
+            .checklist-title {
+                font-size: 2.2em;
+                margin-bottom: 15px;
+                page-break-inside: avoid;
+                text-align: center;
+            }
+            
+            .checklist-subtitle {
+                font-size: 1.1em;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+            
+            .progress-bar,
+            .progress-text,
+            .completion-message,
+            .action-buttons,
+            .back-link {
+                display: none; /* Hide interactive elements when printing */
+            }
+            
+            .checklist-card {
+                background: white;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 12px 16px;
+                margin: 12px 0;
+                box-shadow: none;
+                backdrop-filter: none;
+                page-break-inside: avoid;
+                break-inside: avoid;
+            }
+            
+            .section-title {
+                font-size: 1.4em;
+                margin-bottom: 12px;
+                padding-bottom: 6px;
+                border-bottom: 2px solid #333;
+                font-weight: bold;
+            }
+            
+            .checklist-item {
+                margin: 8px 0;
+                padding: 4px 0;
+                display: flex;
+                align-items: flex-start;
+            }
+            
+            .checklist-checkbox {
+                width: 16px;
+                height: 16px;
+                margin-right: 12px;
+                margin-top: 2px;
+                transform: none;
+                border: 2px solid #333;
+            }
+            
+            .checklist-text {
+                font-size: 1em;
+                line-height: 1.4;
+                color: black;
+            }
+            
+            /* Allow content across two pages with good margins */
+            @page {
+                margin: 0.75in;
+                size: letter;
+            }
+            
+            body {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
