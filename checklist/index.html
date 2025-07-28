@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Host Checklist — Sundays in SF</title>
+    <meta name="description" content="Weekly setup checklist for Sundays in SF hosts">
+    <link rel="icon" type="image/png" href="../sun-favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #FFFFFF;
+            transition: background-color 0.8s ease-in-out;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../cloud-background.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            opacity: 0.9;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            font-family: 'Lato', sans-serif;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .checklist-title {
+            font-family: 'Shadows Into Light Two', cursive;
+            font-size: 3.5em;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .checklist-subtitle {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .checklist-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-align: left;
+        }
+
+        .section-title {
+            font-family: 'Shadows Into Light Two', cursive;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .checklist-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #4CAF50;
+            transform: scale(1.2);
+        }
+
+        .checklist-text {
+            flex: 1;
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4CAF50, #45a049);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.6);
+            color: #333;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Lato', sans-serif;
+            font-size: 1.1em;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-1px);
+        }
+
+        .completion-message {
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #2E7D32;
+            font-weight: 600;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .checklist-title {
+                font-size: 2.5em;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .checklist-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="../" class="back-link">← Back to Sundays in SF</a>
+    
+    <div class="container">
+        <h1 class="checklist-title">Host Checklist</h1>
+        <p class="checklist-subtitle">Weekly setup guide for Sundays in SF sessions</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText">0% Complete (0 of 0 tasks)</div>
+        
+        <div class="completion-message" id="completionMessage">
+            🎉 All tasks completed! Congrats on hosting an amazing Sundays in SF session!
+        </div>
+
+        <div class="action-buttons">
+            <button class="action-btn" onclick="clearAll()">Clear All</button>
+            <button class="action-btn" onclick="exportProgress()">Export Progress</button>
+            <button class="action-btn" onclick="printChecklist()">Print Checklist</button>
+        </div>
+
+        <div class="checklist-card">
+            <h2 class="section-title">Monday - Wednesday</h2>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Invite 5-10 attendees</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Approve guest sign ups on lu.ma daily</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Confirm venue availability and access</div>
+            </div>
+        </div>
+
+        <div class="checklist-card">
+            <h2 class="section-title">Thursday - Friday</h2>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Order food to arrive at 12:30 pm on Sunday for 15-20 people</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Approve guest sign ups on lu.ma daily</div>
+            </div>
+        </div>
+
+        <div class="checklist-card">
+            <h2 class="section-title">Saturday</h2>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Approve final few guest sign ups on lu.ma</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Finalize event playlist and charge speaker for music</div>
+            </div>
+        </div>
+
+        <div class="checklist-card">
+            <h2 class="section-title">Sunday Before Session Begins</h2>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Arrive by 12:15 and set up food in kitchen once it is delivered</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Set up beverages, snacks, and/or merch on coffee table near TV</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Erase all whiteboards in the office space</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Connect to speaker and play event playlist</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Connect to TV and set up Focus Timer</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Place doorstop to keep door open</div>
+            </div>
+        </div>
+
+        <div class="checklist-card">
+            <h2 class="section-title">Sunday During Session</h2>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Check in guests and swipe them up to the office space</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Housekeeping rules (co-working atmosphere, clean up after yourselves, no photos except for final selfie, no talking about work!)</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Round of brief introductions (Name, Hometown, What they will work on, QOTD</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Share that Guest WiFi password is posted around the room</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Focus round (1 hour) then break (20 mins) then another Focus round (1 hour) then Demos (25 mins)</div>
+            </div>
+        </div>
+
+        <div class="checklist-card">
+            <h2 class="section-title">Sunday End of Session</h2>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Take group selfie</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Encourage guests to pack and take home any leftover food</div>
+            </div>
+            <div class="checklist-item">
+                <input type="checkbox" class="checklist-checkbox" onchange="updateProgress()">
+                <div class="checklist-text">Thoroughly clean up office space and kitchen</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            const checkedBoxes = document.querySelectorAll('.checklist-checkbox:checked');
+            const total = checkboxes.length;
+            const completed = checkedBoxes.length;
+            const percentage = Math.round((completed / total) * 100);
+
+            // Update progress bar
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            const completionMessage = document.getElementById('completionMessage');
+
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = `${percentage}% Complete (${completed} of ${total} tasks)`;
+
+            // Update individual item states
+            checkboxes.forEach((checkbox, index) => {
+                const item = checkbox.closest('.checklist-item');
+                if (checkbox.checked) {
+                    item.classList.add('completed');
+                } else {
+                    item.classList.remove('completed');
+                }
+            });
+
+            // Show completion message
+            if (completed === total && total > 0) {
+                completionMessage.style.display = 'block';
+            } else {
+                completionMessage.style.display = 'none';
+            }
+
+            // Save progress to localStorage
+            saveProgress();
+        }
+
+        function clearAll() {
+            if (confirm('Are you sure you want to clear all checked items?')) {
+                const checkboxes = document.querySelectorAll('.checklist-checkbox');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateProgress();
+            }
+        }
+
+        function exportProgress() {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            const items = document.querySelectorAll('.checklist-text');
+            let report = 'Sundays in SF Host Checklist Progress\n';
+            report += '=====================================\n\n';
+
+            checkboxes.forEach((checkbox, index) => {
+                const status = checkbox.checked ? '✓' : '☐';
+                const text = items[index].textContent;
+                report += `${status} ${text}\n`;
+            });
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'sundays-in-sf-checklist.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function printChecklist() {
+            window.print();
+        }
+
+        function saveProgress() {
+            const checkboxes = document.querySelectorAll('.checklist-checkbox');
+            const progress = Array.from(checkboxes).map(cb => cb.checked);
+            localStorage.setItem('sundaysInSfChecklist', JSON.stringify(progress));
+        }
+
+        function loadProgress() {
+            const saved = localStorage.getItem('sundaysInSfChecklist');
+            if (saved) {
+                const progress = JSON.parse(saved);
+                const checkboxes = document.querySelectorAll('.checklist-checkbox');
+                checkboxes.forEach((checkbox, index) => {
+                    if (progress[index] !== undefined) {
+                        checkbox.checked = progress[index];
+                    }
+                });
+                updateProgress();
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            updateProgress();
+        });
+    </script>
+</body>
+
+</html> 
