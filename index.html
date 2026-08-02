@@ -399,11 +399,11 @@
         <div class="info-block">
             <div class="info-block-item">
               <span class="emoji">🕐</span>
-              <span>Sundays, 1 PM – 4:30 PM</span>
+              <span>Sundays, 10 AM – 1 PM</span>
             </div>
             <div class="info-block-item">
                 <span class="emoji">📍</span>
-                <span>FiDi – Voltage Park</span>
+                <span>Hayes Valley – <a href="https://www.google.com/maps/place/The+Commons/@37.7757847,-122.4343552,14z/data=!4m6!3m5!1s0x808581e484c7ba29:0xeca82b01c21debe5!8m2!3d37.7763673!4d-122.4261191!16s%2Fg%2F11t7ygllnm?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank">The Commons</a></span>
               </div>
             <div class="info-block-item">
               <span class="emoji">🌯</span>
@@ -495,7 +495,7 @@
             We want to create an environment that facilitates exploration and creativity. To do this, we ask that you treat Sundays in SF as a second home: don't make a mess, and approach fellow co-(co?)workers as you would guests in your home. We ask that Luma tickets be present for admission.
             <br><br> -->
             <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold; font-family: 'Shadows Into Light Two', cursive; font-size: 2.2em;">Acknowledgements</p>
-            <p style="text-align: center; margin-top: 5px;">Thank you to <a href="https://www.voltagepark.com" target="_blank">Voltage Park</a> for providing the space and food, and thank you to our friends at <a href="https://playspace.club" target="_blank">Playspace</a> and <a href="https://www.socratica.info" target="_blank">Socratica</a> for inspiring the creation of Sundays in SF!</p>
+            <p style="text-align: center; margin-top: 5px;">Thank you to <a href="https://www.thesfcommons.com/about" target="_blank">the Commons</a> for providing the space (also the <a href="https://www.thesfnook.com/" target="_blank">Nook</a> and <a href="https://www.voltagepark.com/" target="_blank">Voltage Park</a>), and thank you to our friends at <a href="https://playspace.club" target="_blank">Playspace</a> and <a href="https://www.socratica.info" target="_blank">Socratica</a> for inspiring the creation of Sundays in SF!</p>
             <p style="text-align: center; margin-top: 40px; margin-bottom: 0; font-weight: bold; font-family: 'Shadows Into Light Two', cursive; font-size: 2.2em;">Upcoming Sunday Event</p>
         </p><iframe
         src="https://lu.ma/embed/calendar/cal-FFBSUEbqC7XLj6d/events?compact=true&lt=light"
@@ -577,11 +577,11 @@
             let nextSunday = new Date(now);
             
             if (currentDay === 0) { // Today is Sunday
-                if (currentHour >= 13) { // 1 PM or later
+                if (currentHour >= 10) { // 10 AM or later
                     // Show next Sunday (7 days from now)
                     nextSunday.setDate(now.getDate() + 7);
                 }
-                // If it's Sunday before 1 PM, show today (don't add days)
+                // If it's Sunday before 10 AM, show today (don't add days)
             } else {
                 // Calculate days until next Sunday
                 const daysUntilSunday = 7 - currentDay;
